@@ -18,7 +18,7 @@ export default new Vuex.Store({
     },
     imageDir: '../images/',
     gallery: [
-      'pic01.jpg', 'pic02.jpg', 'pic03.jpg',
+      'pic01.jpg', 'pic02.jpg', 'pic03.jpg', 'pic04.jpg', 'pic05.jpg', 'pic06.jpg', 'pic07.jpg',
     ],
   },
   mutations: {

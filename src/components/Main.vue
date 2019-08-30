@@ -6,7 +6,12 @@
       class="panel"
     >
       <header v-html="header"></header>
-      <a @click="$store.commit('go', 'work')" v-if="this.$store.state.current == 'home'" href="#" class="jumplink pic">
+      <a
+        @click="$store.commit('go', 'work')"
+        v-if="this.$store.state.current == 'home'"
+        href="#"
+        class="jumplink pic"
+      >
         <span class="arrow icon solid fa-chevron-right">
           <span>看看我的作品</span>
         </span>
@@ -43,8 +48,23 @@ export default class Main extends Vue {
   }
 
   public imageDir = '../images';
+
+  public mounted() {
+    this.$store.watch(
+      (state) => state.current,
+      () => {
+        const panel = document.getElementsByClassName('panel')[0] as HTMLElement;
+        panel.style.visibility = 'hidden';
+        setTimeout(() => {
+          panel.style.visibility = 'visible';
+          panel.classList.add('animated', 'fadeIn');
+        }, 250);
+      },
+    );
+  }
 }
 </script>
 
-<yle>
+<style lang="scss" scoped>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
 </style>

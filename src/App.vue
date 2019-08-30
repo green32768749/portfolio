@@ -5,18 +5,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Wrapper from "./components/Wrapper.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import Wrapper from './components/Wrapper.vue';
 
 @Component({
   components: {
-    Wrapper
-  }
+    Wrapper,
+  },
 })
 export default class App extends Vue {
-  beforeMount() {
-    window.setTimeout(function() {
-      document.body.className = "";
+  public beforeMount() {
+    window.setTimeout(() => {
+      document.body.className = '';
     }, 100);
   }
 }

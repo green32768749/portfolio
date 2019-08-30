@@ -33,8 +33,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Nav extends Vue {
-  go (location: string) {
-    this.$store.commit('go', location)
+  public go(location: string) {
+    this.$store.commit('go', location);
   }
 }
 </script>
