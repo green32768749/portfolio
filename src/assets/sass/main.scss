@@ -4,8 +4,7 @@
 @import 'libs/vendor';
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic');
-// @import url('fontawesome-all.min.css');
+@import url('assets/css/fontawesome-all.min.css');
 
 /*
 	Astral by HTML5 UP
@@ -146,7 +145,7 @@
 	}
 
 	body, input, textarea, select {
-		font-family: 'Source Sans Pro', sans-serif;
+		font-family: 'Noto Sans TC', sans-serif;
 		font-weight: 300;
 		color: #777777;
 		font-size: 20pt;

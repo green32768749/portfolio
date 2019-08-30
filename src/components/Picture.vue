@@ -1,7 +1,7 @@
 <template>
   <div class="col-4 col-6-medium col-12-small">
     <a href="#" class="image fit">
-      <img src="images/pic01.jpg" alt />
+      <img :src="src" alt />
     </a>
   </div>
 </template>
@@ -10,7 +10,9 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Picture extends Vue {}
+export default class Picture extends Vue {
+  @Prop(String) public src: string | undefined;
+}
 </script>
 
 <style scoped lang="scss">

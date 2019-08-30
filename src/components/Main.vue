@@ -1,11 +1,26 @@
 <template>
   <div id="main">
-    <article :id="this.$store.state.current" class="panel intro">
+    <article
+      :id="this.$store.state.current"
+      :class="{ intro: this.$store.state.current == 'home' }"
+      class="panel"
+    >
       <header v-html="header"></header>
-      <span v-html="content"></span>
-      <section>
+      <a @click="$store.commit('go', 'work')" v-if="this.$store.state.current == 'home'" href="#" class="jumplink pic">
+        <span class="arrow icon solid fa-chevron-right">
+          <span>看看我的作品</span>
+        </span>
+        <img :src="require('../images/me.jpg')" alt />
+      </a>
+
+      <p v-if="this.$store.state.current == 'work'">這邊可以排很多文字....</p>
+      <section v-if="this.$store.state.current == 'work'">
         <div class="row">
-          <Picture />
+          <Picture
+            :key="key"
+            v-for="(img, key) in this.$store.state.gallery"
+            :src="require('../images/' + img)"
+          />
           <!-- for loop -->
         </div>
       </section>
@@ -27,11 +42,9 @@ export default class Main extends Vue {
     return this.$store.state.articles[this.$store.state.current].header;
   }
 
-  get content() {
-    return this.$store.state.articles[this.$store.state.current].content;
-  }
+  public imageDir = '../images';
 }
 </script>
 
-<style>
+<yle>
 </style>
