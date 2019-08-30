@@ -2,8 +2,9 @@
 
 ## Todo
 
-* [ ] Browser capibility (IE 8)
+* [ ] Browser capibility (IE 8 etc...)
   * browser-js
+  * noscript
 * [ ] Panel size dropdown animation
 
 ## Project setup
