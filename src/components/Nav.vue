@@ -2,6 +2,7 @@
   <nav id="nav">
     <a
       @click="go('home')"
+      href="#"
       :class="{ active: this.$store.state.current == 'home' }"
       class="icon solid fa-home"
       aria-hidden="true"
@@ -10,6 +11,7 @@
     </a>
     <a
       @click="go('work')"
+      href="#"
       :class="{ active: this.$store.state.current == 'work' }"
       class="icon solid fa-folder"
       aria-hidden="true"
