@@ -23,7 +23,7 @@
       class="icon brands solid fa-facebook-square"
       aria-hidden="true"
     >
-      <span>聯繫</span>
+      <span>Facebook</span>
     </a>
   </nav>
 </template>
