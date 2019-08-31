@@ -12,21 +12,40 @@
         href="#"
         class="jumplink pic"
       >
-        <span class="arrow icon solid fa-chevron-right">
+        <!-- <span class="arrow icon solid fa-chevron-right">
           <span>看看我的作品</span>
-        </span>
-        <img :src="require('../images/me.jpg')" alt />
+        </span>-->
+        <img :src="require('@/images/me.png')" alt />
       </a>
 
-      <p v-if="this.$store.state.current == 'work'">這邊可以排很多文字....</p>
+      <p v-if="this.$store.state.current == 'work'">委託</p>
       <section v-if="this.$store.state.current == 'work'">
         <div class="row">
           <Picture
             :key="key"
-            v-for="(img, key) in this.$store.state.gallery"
-            :src="require('../images/' + img)"
+            v-for="(key) in this.$store.state.gallery.commission.amount"
+              :src="require(`@/images/com${pad(key)}.jpg`)"
           />
-          <!-- for loop -->
+        </div>
+      </section>
+      <p v-if="this.$store.state.current == 'work'">原創</p>
+      <section v-if="this.$store.state.current == 'work'">
+        <div class="row">
+          <Picture
+            :key="key"
+            v-for="(key) in this.$store.state.gallery.original.amount"
+              :src="require(`@/images/ori${pad(key)}.jpg`)"
+          />
+        </div>
+      </section>
+      <p v-if="this.$store.state.current == 'work'">二創</p>
+      <section v-if="this.$store.state.current == 'work'">
+        <div class="row">
+          <Picture
+            :key="key"
+            v-for="(key) in this.$store.state.gallery.secondCreation.amount"
+              :src="require(`@/images/sec${pad(key)}.jpg`)"
+          />
         </div>
       </section>
     </article>
@@ -47,13 +66,15 @@ export default class Main extends Vue {
     return this.$store.state.articles[this.$store.state.current].header;
   }
 
-  public imageDir = '../images';
+  public pad = (num: number) => `0${num}`.slice(-2);
 
   public mounted() {
     this.$store.watch(
       (state) => state.current,
       () => {
-        const panel = document.getElementsByClassName('panel')[0] as HTMLElement;
+        const panel = document.getElementsByClassName(
+          'panel',
+        )[0] as HTMLElement;
         panel.style.visibility = 'hidden';
         setTimeout(() => {
           panel.style.visibility = 'visible';
