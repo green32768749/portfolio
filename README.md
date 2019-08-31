@@ -6,6 +6,9 @@
   * browser-js
   * noscript
 * [ ] Panel size dropdown animation
+* [ ] Webpack
+  * image optimization
+* [ ] Sass migration
 
 ## Project setup
 
