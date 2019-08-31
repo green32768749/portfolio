@@ -1,12 +1,12 @@
 <template>
   <div id="footer">
     <ul class="copyright">
-      <li>Copyright &copy; 圖片屬於 green32768749 版權所有</li>
+      <li>Copyright &copy; 圖片屬於 <a href="https://www.facebook.com/people/Lin-Lynn/100010045894625">Lin Lynn</a> 版權所有</li>
       <li>
-        程式碼以 CC 3.0 By 方式授權，樣板來自
+        程式碼授權方式與原版相同，樣板來自
         <a href="http://html5up.net">HTML5 UP</a>
       </li>
-      <li>@SheiUn 使用 Vue 改寫</li>
+      <li><a href="https://github.com/sheiun/">@SheiUn</a> 使用 <a href="https://vuejs.org/">Vue</a> 改寫</li>
     </ul>
   </div>
 </template>

@@ -20,6 +20,7 @@
     </a>
     <a
       href="https://www.facebook.com/people/Lin-Lynn/100010045894625"
+      target="_blank"
       class="icon brands solid fa-facebook-square"
       aria-hidden="true"
     >
