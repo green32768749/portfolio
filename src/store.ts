@@ -10,16 +10,27 @@ export default new Vuex.Store({
       home: {
         header:
           `<h1>綠綠</h1>
-           <p>委託 / 設計 / 人設</p>`,
+           <p>委託可以透過 fb 私訊我 <3</p>`,
       },
       work: {
         header: '<h2>作品</h2>',
       },
     },
-    imageDir: '../images/',
-    gallery: [
-      'pic01.jpg', 'pic02.jpg', 'pic03.jpg', 'pic04.jpg', 'pic05.jpg', 'pic06.jpg', 'pic07.jpg',
-    ],
+    imageDir: '@/images/',
+    gallery: {
+      commission: {
+        format: 'com{}.jpg',
+        amount: 14,
+      },
+      original: {
+        format: 'ori{}.jpg',
+        amount: 1,
+      },
+      secondCreation: {
+        format: 'sec{}.jpg',
+        amount: 1,
+      },
+    },
   },
   mutations: {
     go(state, location) {
