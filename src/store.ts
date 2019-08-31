@@ -20,7 +20,7 @@ export default new Vuex.Store({
     gallery: {
       commission: {
         format: 'com{}.jpg',
-        amount: 14,
+        amount: 13,
       },
       original: {
         format: 'ori{}.jpg',
