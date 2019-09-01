@@ -11,8 +11,8 @@
 * [ ] Sass migration
 * [ ] Clikable Image
   * Lightbox
-* [ ] Seperate portfolio part and commission part
-* [ ] Add tab in portfolio part
+* [x] Seperate portfolio part and commission part
+* [x] Add tab in portfolio part
 
 ## Project setup
 
