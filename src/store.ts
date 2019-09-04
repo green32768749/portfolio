@@ -22,11 +22,11 @@ export default new Vuex.Store({
         images: {
           original: {
             title: '原創',
-            amount: 1,
+            amount: 3,
           },
           secondCreation: {
             title: '二創',
-            amount: 1,
+            amount: 3,
           },
         },
       },
@@ -35,11 +35,11 @@ export default new Vuex.Store({
         images: {
           price: {
             title: '價格',
-            amount: 1,
+            amount: 2,
           },
           com: {
             title: '範例',
-            amount: 13,
+            amount: 15,
           },
         },
       },
