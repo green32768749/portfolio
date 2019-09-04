@@ -41,7 +41,7 @@
       class="icon solid fa-parking"
       aria-hidden="true"
     >
-      <span>Purk</span>
+      <span>Plurk</span>
     </a>
   </nav>
 </template>
