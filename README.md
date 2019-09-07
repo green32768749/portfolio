@@ -13,6 +13,7 @@
   * Lightbox
 * [x] Seperate portfolio part and commission part
 * [x] Add tab in portfolio part
+* [x] Image Lazy Loading
 
 ## Project setup
 

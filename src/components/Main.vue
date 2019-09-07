@@ -68,19 +68,34 @@ export default class Main extends Vue {
   }
 
   public mounted() {
-    this.$store.watch(
-      (state) => state.bookmark,
-      () => {
-        const panel = document.getElementsByClassName(
-          'panel',
-        )[0] as HTMLElement;
-        panel.style.visibility = 'hidden';
-        setTimeout(() => {
-          panel.style.visibility = 'visible';
-          panel.classList.add('animated', 'fadeIn');
-        }, 250);
-      },
-    );
+    this.$store.watch((state) => state.bookmark, () => {
+      this.panelLazyLoad();
+    });
+    this.$store.watch((state) => state.tab, () => {
+      this.imageLazyLoad();
+    });
+  }
+
+  public panelLazyLoad() {
+    const panel = document.getElementsByClassName('panel')[0] as HTMLElement;
+    panel.style.visibility = 'hidden';
+    setTimeout(() => {
+      panel.style.visibility = 'visible';
+      panel.classList.add('animated', 'fadeIn');
+    }, 250);
+  }
+
+  public imageLazyLoad() {
+    const images = Array.from(document.getElementsByTagName('img'));
+    images.forEach((image) => {
+      image.style.visibility = 'hidden';
+    });
+    setTimeout(() => {
+      images.forEach((image) => {
+        image.style.visibility = 'visible';
+        image.classList.add('animated', 'fadeIn');
+      });
+    }, 250);
   }
 }
 </script>
