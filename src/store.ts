@@ -39,7 +39,7 @@ export default new Vuex.Store({
           },
           com: {
             title: '範例',
-            amount: 15,
+            amount: 19,
           },
         },
       },
