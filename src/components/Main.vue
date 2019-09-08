@@ -33,10 +33,12 @@
         </p>
         <div class="row">
           <Picture
-            :key="key"
-            v-for="(key) in $store.getters.targetTab.amount"
-            :src="getImageUrl(key, $store.getters.targetType)"
+            :key="index"
+            v-for="(index) in $store.getters.targetTab.amount"
+            :src="getImageUrl(index, $store.getters.targetType)"
+            :click="() => showImg(index)"
           />
+          <VueEasyLightbox :visible="visible" :imgs="getImages()" @hide="handleHide"></VueEasyLightbox>
         </div>
       </section>
     </article>
@@ -44,12 +46,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Prop, Vue } from 'vue-property-decorator';
+import Component from 'vue-class-component';
 import Picture from './Picture.vue';
+import VueEasyLightbox from 'vue-easy-lightbox';
 
 @Component({
   components: {
     Picture,
+    VueEasyLightbox,
   },
 })
 export default class Main extends Vue {
@@ -57,10 +62,21 @@ export default class Main extends Vue {
     return this.$store.state.articles[this.$store.state.bookmark].header;
   }
 
+  public visible = false ;
+  public index = 0;
+
   public pad = (num: number) => `0${num}`.slice(-2);
 
-  public getImageUrl(key: number, type: string = 'ori') {
-    return require(`@/images/${type}${this.pad(key)}.jpg`);
+  public getImageUrl(index: number, type: string = 'ori') {
+    return require(`@/images/${type}${this.pad(index)}.jpg`);
+  }
+
+  public getImages() {
+    const images = [];
+    for (let i = 1; i <= this.$store.getters.targetTab.amount; i++) {
+      images.push(this.getImageUrl(i, this.$store.getters.targetType));
+    }
+    return images;
   }
 
   public go(location: string) {
@@ -68,12 +84,18 @@ export default class Main extends Vue {
   }
 
   public mounted() {
-    this.$store.watch((state) => state.bookmark, () => {
-      this.panelLazyLoad();
-    });
-    this.$store.watch((state) => state.tab, () => {
-      this.imageLazyLoad();
-    });
+    this.$store.watch(
+      (state) => state.bookmark,
+      () => {
+        this.panelLazyLoad();
+      },
+    );
+    this.$store.watch(
+      (state) => state.tab,
+      () => {
+        this.imageLazyLoad();
+      },
+    );
   }
 
   public panelLazyLoad() {
@@ -97,6 +119,15 @@ export default class Main extends Vue {
       });
     }, 250);
   }
+
+  public showImg(index: number) {
+    this.index = index;
+    this.visible = true;
+  }
+
+  public handleHide() {
+    this.visible = false ;
+   }
 }
 </script>
 
