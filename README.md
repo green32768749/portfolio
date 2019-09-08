@@ -2,11 +2,8 @@
 
 ## Todo
 
-* [ ] Browser capibility (IE 8 etc...)
-  * browser-js
-  * noscript
 * [ ] Panel size dropdown animation
-* [ ] Webpack
+* [ ] Webpack (wait Webpack 5)
   * image optimization
 * [ ] Sass migration
 * [x] Clikable Image
