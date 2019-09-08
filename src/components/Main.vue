@@ -38,7 +38,7 @@
             :src="getImageUrl(index, $store.getters.targetType)"
             :click="() => showImg(index)"
           />
-          <VueEasyLightbox :visible="visible" :imgs="getImages()" @hide="handleHide"></VueEasyLightbox>
+          <VueEasyLightbox :index="index" :visible="visible" :imgs="getImages()" @hide="handleHide"></VueEasyLightbox>
         </div>
       </section>
     </article>
@@ -121,7 +121,8 @@ export default class Main extends Vue {
   }
 
   public showImg(index: number) {
-    this.index = index;
+    // v-for range will start with 1;
+    this.index = index - 1;
     this.visible = true;
   }
 
