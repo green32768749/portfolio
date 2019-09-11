@@ -1,47 +1,60 @@
 <template>
   <div id="main">
-    <article
-      :id="this.$store.state.bookmark"
-      :class="{ intro: this.$store.state.bookmark === 'home' }"
-      class="panel"
-    >
-      <header v-html="header"></header>
-
-      <a
-        @click="$store.commit('go', 'work')"
-        v-if="this.$store.state.bookmark === 'home'"
-        href="#"
-        class="jumplink pic"
+    <transition name="fade">
+      <article
+        v-if="panelShow"
+        :id="this.$store.state.bookmark"
+        :class="{ intro: this.$store.state.bookmark === 'home' }"
+        class="panel"
       >
-        <!-- <span class="arrow icon solid fa-chevron-right">
-          <span>看看我的作品</span>
-        </span>-->
-        <img :src="require('@/images/me.png')" alt />
-      </a>
+        <header v-html="header"></header>
 
-      <section v-if="this.$store.state.bookmark != 'home'">
-        <p>
-          <span
-            class="tab"
-            @click="go(tab)"
-            :key="tab"
-            v-for="tab in Object.keys($store.getters.tabs)"
-          >
-            <i class="icon fa-star" :class="{ solid : $store.state.tab == tab }"></i>
-            {{ $store.getters.tabs[tab].title }}
-          </span>
-        </p>
-        <div class="row">
-          <Picture
-            :key="index"
-            v-for="(index) in $store.getters.targetTab.amount"
-            :src="getImageUrl(index, $store.getters.targetType)"
-            :click="() => showImg(index)"
-          />
-          <VueEasyLightbox :index="index" :visible="visible" :imgs="getImages()" @hide="handleHide"></VueEasyLightbox>
-        </div>
-      </section>
-    </article>
+        <a
+          @click="$store.commit('go', 'work')"
+          v-if="this.$store.state.bookmark === 'home'"
+          href="#"
+          class="jumplink pic"
+        >
+          <!-- <span class="arrow icon solid fa-chevron-right">
+          <span>看看我的作品</span>
+          </span>-->
+          <img :src="require('@/images/me.png')" alt />
+        </a>
+
+        <section v-if="this.$store.state.bookmark != 'home'">
+          <p>
+            <span
+              class="tab"
+              @click="go(tab)"
+              :key="tab"
+              v-for="tab in Object.keys($store.getters.tabs)"
+            >
+              <i
+                class="icon fa-star"
+                :class="{ solid: $store.state.tab == tab }"
+              ></i>
+              {{ $store.getters.tabs[tab].title }}
+            </span>
+          </p>
+          <transition name="fade">
+            <div class="row" v-if="imageShow">
+              <Picture
+                :key="index"
+                v-for="index in $store.getters.targetTab.amount"
+                :src="getImageUrl(index, $store.getters.targetType)"
+                :click="() => showImg(index)"
+              />
+            </div>
+          </transition>
+          <VueEasyLightbox
+            :index="index"
+            :visible="visible"
+            :imgs="getImages()"
+            @hide="handleHide"
+          ></VueEasyLightbox>
+        </section>
+      </article>
+    </transition>
   </div>
 </template>
 
@@ -62,7 +75,10 @@ export default class Main extends Vue {
     return this.$store.state.articles[this.$store.state.bookmark].header;
   }
 
-  public visible = false ;
+  public panelShow = true;
+  public imageShow = true;
+
+  public visible = false;
   public index = 0;
 
   public pad = (num: number) => `0${num}`.slice(-2);
@@ -87,37 +103,33 @@ export default class Main extends Vue {
     this.$store.watch(
       (state) => state.bookmark,
       () => {
-        this.panelLazyLoad();
+        this.panelShow = false;
+        setTimeout(() => {
+          this.panelShow = true;
+        });
+        // this.panelGrow();
       },
     );
     this.$store.watch(
       (state) => state.tab,
       () => {
-        this.imageLazyLoad();
+        this.imageShow = false;
+        setTimeout(() => {
+          this.imageShow = true;
+        });
       },
     );
   }
 
-  public panelLazyLoad() {
+  public panelGrow() {
+    // not work yet
     const panel = document.getElementsByClassName('panel')[0] as HTMLElement;
-    panel.style.visibility = 'hidden';
-    setTimeout(() => {
-      panel.style.visibility = 'visible';
-      panel.classList.add('animated', 'fadeIn');
-    }, 250);
-  }
+    const computedPanel = getComputedStyle(panel);
+    const height = computedPanel.height;
 
-  public imageLazyLoad() {
-    const images = Array.from(document.getElementsByTagName('img'));
-    images.forEach((image) => {
-      image.style.visibility = 'hidden';
-    });
     setTimeout(() => {
-      images.forEach((image) => {
-        image.style.visibility = 'visible';
-        image.classList.add('animated', 'fadeIn');
-      });
-    }, 250);
+      panel.style.height = height;
+    });
   }
 
   public showImg(index: number) {
@@ -127,16 +139,26 @@ export default class Main extends Vue {
   }
 
   public handleHide() {
-    this.visible = false ;
-   }
+    this.visible = false;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css');
 
 .tab {
   cursor: pointer;
   margin-right: 1vw;
 }
-</style>
+
+.fade-leave-to, .fade-enter {
+  opacity: 0;
+}
+.fade-leave-active, .fade-enter-active {
+  transition: opacity 2s;
+}
+.fade-leave , .fade-enter-to {
+  opacity: 1;
+}
+</style> 
