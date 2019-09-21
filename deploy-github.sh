@@ -2,7 +2,7 @@ npm run build
 
 cd dist
 
-"綠綠.tw" > CNAME
+"xn--hf0aa.tw" > CNAME
 git init
 git add -A
 git commit -m 'deploy'
