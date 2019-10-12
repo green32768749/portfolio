@@ -42,6 +42,12 @@ npm run test
 npm run lint
 ```
 
+### Serve like server
+
+```bash
+serve -s ./dist/
+```
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
