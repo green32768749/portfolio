@@ -22,7 +22,7 @@ export default new Vuex.Store({
         images: {
           original: {
             title: '原創',
-            amount: 3,
+            amount: 8,
           },
           secondCreation: {
             title: '二創',
