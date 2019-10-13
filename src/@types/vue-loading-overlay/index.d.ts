@@ -1,11 +1,16 @@
 declare module 'vue-loading-overlay' {
+    import { PluginFunction } from "vue";
 
+    export const install: PluginFunction<{}>;
 
-    export class Loading {
-        constructor(props?: object, slots?: object);
-
+    interface LoadingApi {
         show(): void;
         hide(): void;
+    }
 
+    module "vue/types/vue" {
+        interface Vue {
+            $loading: LoadingApi;
+        }
     }
 }
