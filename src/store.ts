@@ -73,8 +73,8 @@ export default new Vuex.Store({
       plan: {
         header: '<h2>企劃</h2>',
         tab: {
-          planPicture: {
-            title: '企劃圖',
+          wdl: {
+            title: 'WDL',
           },
         },
       },
