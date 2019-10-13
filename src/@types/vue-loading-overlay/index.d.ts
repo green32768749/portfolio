@@ -4,7 +4,7 @@ declare module 'vue-loading-overlay' {
     export const install: PluginFunction<{}>;
 
     interface LoadingApi {
-        show(): void;
+        show(): LoadingApi;
         hide(): void;
     }
 
