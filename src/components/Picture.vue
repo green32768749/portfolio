@@ -1,6 +1,6 @@
 <template>
   <div :class="$store.state.tab == 'price' ? 'col-12' : 'col-4 col-6-medium col-12-small'">
-    <a @click="click" href="#" class="image fit">
+    <a @click="click" class="image fit">
       <img :src="src" alt />
     </a>
   </div>
@@ -17,4 +17,7 @@ export default class Picture extends Vue {
 </script>
 
 <style scoped lang="scss">
+a {
+  cursor: pointer;
+}
 </style>
