@@ -1,47 +1,15 @@
 <template>
   <nav id="nav">
     <a
-      @click="go('home')"
-      href="#"
-      :class="{ active: this.$store.state.bookmark === 'home' }"
-      class="icon solid fa-home"
+      v-for="(value, key) in $store.state.nav"
+      :key="key"
+      @click="value.link ? null : go(key)"
+      :href="value.link ? value.link : '#'"
+      :target="value.link ? '_blank' : null"
+      :class="[{ active: $store.state.bookmark === key }, 'icon ' + value.icon]"
       aria-hidden="true"
     >
-      <span>首頁</span>
-    </a>
-    <a
-      @click="go('work')"
-      href="#"
-      :class="{ active: this.$store.state.bookmark === 'work' }"
-      class="icon solid fa-cat"
-      aria-hidden="true"
-    >
-      <span>作品</span>
-    </a>
-    <a
-      @click="go('commission')"
-      href="#"
-      :class="{ active: this.$store.state.bookmark === 'commission' }"
-      class="icon solid fa-fish"
-      aria-hidden="true"
-    >
-      <span>委託</span>
-    </a>
-    <a
-      href="https://www.facebook.com/people/Lin-Lynn/100010045894625"
-      target="_blank"
-      class="icon brands solid fa-facebook-square"
-      aria-hidden="true"
-    >
-      <span>Facebook</span>
-    </a>
-    <a
-      href="https://www.plurk.com/ki23872902"
-      target="_blank"
-      class="icon solid fa-parking"
-      aria-hidden="true"
-    >
-      <span>Plurk</span>
+      <span>{{ value.name }}</span>
     </a>
   </nav>
 </template>

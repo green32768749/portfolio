@@ -1,5 +1,5 @@
 <template>
-  <div :class="[$store.state.tab == 'price' ? 'col-12' : 'col-4 col-6-medium col-12-small']">
+  <div :class="$store.state.tab == 'price' ? 'col-12' : 'col-4 col-6-medium col-12-small'">
     <a @click="click" href="#" class="image fit">
       <img :src="src" alt />
     </a>

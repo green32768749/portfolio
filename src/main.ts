@@ -2,7 +2,14 @@ import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
 
-Vue.config.productionTip = false ;
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+Vue.use(VueLoading, {
+  color: '#f0897a',
+});
+
+Vue.config.productionTip = false;
 
 new Vue({
   store,

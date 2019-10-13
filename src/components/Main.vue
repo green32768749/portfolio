@@ -15,9 +15,6 @@
           href="#"
           class="jumplink pic"
         >
-          <!-- <span class="arrow icon solid fa-chevron-right">
-          <span>看看我的作品</span>
-          </span>-->
           <img :src="require('@/images/me.png')" alt />
         </a>
 
@@ -40,17 +37,21 @@
             <div class="row" v-if="imageShow">
               <Picture
                 :key="index"
-                v-for="index in $store.getters.targetTab.amount"
-                :src="getImageUrl(index, $store.getters.targetType)"
-                :click="() => showImg(index)"
+                v-for="(item, index) in $store.state.current.images"
+                :src="item[1]"
+                :click="() => showAlbum(index)"
               />
             </div>
           </transition>
           <VueEasyLightbox
             :index="index"
-            :visible="visible"
+            :visible="albumShow"
             :imgs="getImages()"
-            @hide="handleHide"
+            @hide="
+              () => {
+                this.albumShow = false;
+              }
+            "
           ></VueEasyLightbox>
         </section>
       </article>
@@ -77,22 +78,13 @@ export default class Main extends Vue {
 
   public panelShow = true;
   public imageShow = true;
-
-  public visible = false;
+  public albumShow = false;
   public index = 0;
 
-  public pad = (num: number) => `0${num}`.slice(-2);
-
-  public getImageUrl(index: number, type: string = 'ori') {
-    return require(`@/images/${type}${this.pad(index)}.jpg`);
-  }
-
   public getImages() {
-    const images = [];
-    for (let i = 1; i <= this.$store.getters.targetTab.amount; i++) {
-      images.push(this.getImageUrl(i, this.$store.getters.targetType));
-    }
-    return images;
+    return this.$store.state.current.images.map((item: any[]) => {
+      return item[1];
+    });
   }
 
   public go(location: string) {
@@ -100,6 +92,7 @@ export default class Main extends Vue {
   }
 
   public mounted() {
+    this.loadImage();
     this.$store.watch(
       (state) => state.bookmark,
       () => {
@@ -113,16 +106,13 @@ export default class Main extends Vue {
     this.$store.watch(
       (state) => state.tab,
       () => {
-        this.imageShow = false;
-        setTimeout(() => {
-          this.imageShow = true;
-        });
+        this.loadImage();
       },
     );
   }
 
   public panelGrow() {
-    // not work yet
+    // TODO: transition
     const panel = document.getElementsByClassName('panel')[0] as HTMLElement;
     const computedPanel = getComputedStyle(panel);
     const height = computedPanel.height;
@@ -132,14 +122,29 @@ export default class Main extends Vue {
     });
   }
 
-  public showImg(index: number) {
-    // v-for range will start with 1;
-    this.index = index - 1;
-    this.visible = true;
+  public showAlbum(index: number) {
+    this.index = index;
+    this.albumShow = true;
   }
 
-  public handleHide() {
-    this.visible = false;
+  public loadImage(key: string = 'QAZQAZWFR@R') {
+    const loader = this.$loading.show();
+    this.imageShow = false;
+
+    const tab = this.$store.getters.targetTab;
+    let name = '原創';
+    if (tab) {
+      name = tab.title;
+    }
+    fetch(
+      `https://script.google.com/macros/s/AKfycbx2nKhxh5IiPSkI6dsAxNtyRN67wvpAmnK4WETy15BcRJ2VhdHC/exec?key=${key}&name=${name}`,
+    )
+      .then((res) => res.json())
+      .then((jsonArr) => {
+        this.$store.state.current.images = jsonArr;
+        this.imageShow = true;
+        loader.hide();
+      });
   }
 }
 </script>
@@ -152,13 +157,16 @@ export default class Main extends Vue {
   margin-right: 1vw;
 }
 
-.fade-leave-to, .fade-enter {
+.fade-leave-to,
+.fade-enter {
   opacity: 0;
 }
-.fade-leave-active, .fade-enter-active {
+.fade-leave-active,
+.fade-enter-active {
   transition: opacity 2s;
 }
-.fade-leave , .fade-enter-to {
+.fade-leave,
+.fade-enter-to {
   opacity: 1;
 }
 </style> 
