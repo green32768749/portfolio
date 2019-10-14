@@ -50,7 +50,7 @@ export default new Vuex.Store({
       },
       work: {
         header: '<h2>作品</h2>',
-        tab: {
+        tabs: {
           original: {
             title: '原創',
           },
@@ -61,7 +61,7 @@ export default new Vuex.Store({
       },
       commission: {
         header: '<h2>委託</h2>',
-        tab: {
+        tabs: {
           price: {
             title: '價格',
           },
@@ -72,7 +72,7 @@ export default new Vuex.Store({
       },
       plan: {
         header: '<h2>企劃</h2>',
-        tab: {
+        tabs: {
           wdl: {
             title: 'WDL',
           },
@@ -81,14 +81,14 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    targetTab: (state: any) => {
+    bookmark: (state: any) => {
+      return state.articles[state.bookmark];
+    },
+    safeTab: (state: any, getters: any) => {
       if (state.bookmark === 'home') {
         return;
       }
-      return state.articles[state.bookmark].tab[state.tab];
-    },
-    tabs: (state: any) => {
-      return state.articles[state.bookmark].tab;
+      return getters.bookmark.tabs[state.tab];
     },
   },
   mutations: {
@@ -98,15 +98,12 @@ export default new Vuex.Store({
           state.bookmark = location;
           // resetTab
           if (state.bookmark !== 'home') {
-            state.tab = Object.keys(state.articles[state.bookmark].tab)[0];
+            state.tab = Object.keys(state.articles[state.bookmark].tabs)[0];
           }
         }
       } else {
         state.tab = location;
       }
     },
-  },
-  actions: {
-
   },
 });
