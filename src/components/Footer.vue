@@ -19,8 +19,8 @@ export default class Footer extends Vue {}
 </script>
 
 <style scoped lang="scss">
-@import "../assets/sass/libs/vendor";
-@import "../assets/sass/breakpoints";
+@import "@/assets/sass/libs/_vendor";
+@import "@/assets/sass/breakpoints";
 
 #footer {
   color: rgba(255, 255, 255, 0.45);

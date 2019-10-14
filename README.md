@@ -5,7 +5,7 @@
 * [ ] Panel size dropdown animation
 * [ ] Webpack (wait Webpack 5)
   * image optimization
-* [ ] Sass migration
+* [x] Scss/Sass migration
 * [x] Clikable Image
   * Lightbox
 * [x] Seperate portfolio part and commission part
