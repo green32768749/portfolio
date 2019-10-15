@@ -23,10 +23,6 @@ export default new Vuex.Store({
         name: '委託',
         icon: 'solid fa-fish',
       },
-      plan: {
-        name: '企劃',
-        icon: 'solid fa-cookie-bite',
-      },
       facebook: {
         name: 'Facebook',
         icon: 'brands solid fa-facebook-square',
@@ -57,6 +53,9 @@ export default new Vuex.Store({
           secondCreation: {
             title: '二創',
           },
+          plan: {
+            title: '企劃',
+          },
         },
       },
       commission: {
@@ -67,14 +66,6 @@ export default new Vuex.Store({
           },
           example: {
             title: '範例',
-          },
-        },
-      },
-      plan: {
-        header: '<h2>企劃</h2>',
-        tabs: {
-          wdl: {
-            title: 'WDL',
           },
         },
       },
