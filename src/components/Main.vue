@@ -2,22 +2,22 @@
   <div id="main">
     <article
       v-if="state.panelShow"
-      :id="this.$store.state.bookmark"
-      :class="{ intro: this.$store.state.bookmark === 'home' }"
+      :id="$store.state.bookmark"
+      :class="{ intro: $store.state.bookmark === 'home' }"
       class="panel"
     >
       <header v-html="$store.getters.bookmark.header"></header>
 
       <a
         @click="$store.commit('go', 'work')"
-        v-if="this.$store.state.bookmark === 'home'"
+        v-if="$store.state.bookmark === 'home'"
         href="#"
         class="jumplink pic"
       >
         <img :src="require('@/images/me.png')" alt />
       </a>
 
-      <section v-if="this.$store.state.bookmark != 'home'">
+      <section v-if="$store.state.bookmark != 'home'">
         <p>
           <span
             class="tab"
