@@ -1,5 +1,9 @@
 <template>
-  <div :class="$store.state.tab == 'price' ? 'col-12' : 'col-4 col-6-medium col-12-small'">
+  <div
+    :class="
+      $store.state.tab == 'price' ? 'col-12' : 'col-4 col-6-medium col-12-small'
+    "
+  >
     <a @click="click" class="image fit">
       <img :src="src" alt />
     </a>
@@ -7,13 +11,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { createComponent } from '@vue/composition-api';
 
-@Component
-export default class Picture extends Vue {
-  @Prop(String) public src: string | undefined;
-  @Prop(Function) public click: any | undefined;
-}
+export default createComponent({
+  name: 'Picture',
+  props: { src: String, click: Function },
+});
 </script>
 
 <style scoped lang="scss">

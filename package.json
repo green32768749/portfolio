@@ -13,7 +13,6 @@
     "vue": "^2.6.10",
     "vue-easy-lightbox": "^0.7.0",
     "vue-loading-overlay": "^3.2.0",
-    "vue-property-decorator": "^8.3.0",
     "vue-spinner": "^1.0.3",
     "vuex": "^3.0.1"
   },

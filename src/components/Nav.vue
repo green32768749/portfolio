@@ -15,19 +15,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { createComponent } from '@vue/composition-api';
 
-@Component
-export default class Nav extends Vue {
-  public go(location: string) {
-    this.$store.commit('go', location);
-  }
-}
+export default createComponent({
+  name: 'Nav',
+  setup(props, ctx) {
+    const $store = ctx.root.$store;
+
+    function go(location: string) {
+      $store.commit('go', location);
+    }
+    return { go };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/sass/libs/_vendor";
-@import "@/assets/sass/breakpoints";
+@import '@/assets/sass/libs/_vendor';
+@import '@/assets/sass/breakpoints';
 
 #nav {
   text-align: center;
@@ -45,7 +50,7 @@ export default class Nav extends Vue {
     margin: 0 0.25em 0 0.25em;
     opacity: 0.35;
     outline: 0;
-    @include vendor("transition", "opacity .25s ease-in-out");
+    @include vendor('transition', 'opacity .25s ease-in-out');
 
     &.icon:before {
       padding-right: 0;
@@ -56,7 +61,7 @@ export default class Nav extends Vue {
     }
 
     &:after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       left: 50%;
@@ -65,7 +70,7 @@ export default class Nav extends Vue {
       border-bottom: solid 0em #ffffff;
       border-left: solid 0.5em transparent;
       border-right: solid 0.5em transparent;
-      @include vendor("transition", "border-bottom-width .25s ease-in-out");
+      @include vendor('transition', 'border-bottom-width .25s ease-in-out');
     }
 
     span {
@@ -79,13 +84,13 @@ export default class Nav extends Vue {
       line-height: 2.25em;
       left: 50%;
       opacity: 0;
-      @include vendor("transition", "opacity .25s ease-in-out");
+      @include vendor('transition', 'opacity .25s ease-in-out');
       // Labels not wide enough? Increase its width below and set margin-left to ((width / 2) * -1)
       width: 5.5em;
       margin-left: -2.75em;
 
       &:after {
-        content: "";
+        content: '';
         display: block;
         position: absolute;
         bottom: -0.4em;
@@ -114,7 +119,7 @@ export default class Nav extends Vue {
     }
   }
 
-  @include breakpoint("<=medium") {
+  @include breakpoint('<=medium') {
     a {
       span {
         display: none;
