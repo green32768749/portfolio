@@ -12,6 +12,10 @@
 * [x] Add tab in portfolio part
 * [x] Image Lazy Loading
 
+## Milestone
+
+* [x] migrations from class component to vue composition api (prepare for Vue 3)
+
 ## Project setup
 
 ```bash

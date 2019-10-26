@@ -14,29 +14,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import Wrapper from './components/Wrapper.vue';
+import { onBeforeMount, createComponent } from '@vue/composition-api';
 import SquareLoader from 'vue-spinner/src/SquareLoader.vue';
 
-@Component({
+import Wrapper from './components/Wrapper.vue';
+
+export default createComponent({
+  name: 'App',
   components: {
     Wrapper,
     SquareLoader,
   },
-})
-export default class App extends Vue {
-  public spinner = {
-    loading: false,
-    color: '#f0897a',
-    size: '5vw',
-  };
 
-  public beforeMount() {
-    window.setTimeout(() => {
-      document.body.className = '';
-    }, 100);
-  }
-}
+  setup() {
+    const spinner = {
+      loading: false,
+      color: '#f0897a',
+      size: '5vw',
+    };
+    onBeforeMount(() => {
+      window.setTimeout(() => {
+        document.body.className = '';
+      }, 100);
+    });
+    return {
+      spinner,
+    };
+  },
+});
 </script>
 
 <style lang="scss">
