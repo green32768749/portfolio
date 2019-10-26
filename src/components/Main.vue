@@ -69,9 +69,9 @@ export default createComponent({
     Picture,
     VueEasyLightbox,
   },
-  setup(props, ctx) {
-    const $store = ctx.root.$store;
-    const $loading = ctx.root.$loading;
+  setup(props, { root }) {
+    const $store = root.$store;
+    const $loading = root.$loading;
     const state: any = reactive({
       panelShow: true,
       imageShow: true,

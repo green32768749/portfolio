@@ -19,8 +19,8 @@ import { createComponent } from '@vue/composition-api';
 
 export default createComponent({
   name: 'Nav',
-  setup(props, ctx) {
-    const $store = ctx.root.$store;
+  setup(props, { root }) {
+    const $store = root.$store;
 
     function go(location: string) {
       $store.commit('go', location);
