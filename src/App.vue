@@ -46,4 +46,19 @@ export default createComponent({
 
 <style lang="scss">
 @import 'assets/sass/main';
+body {
+  animation: animateCursor 0.5s infinite;
+}
+
+@keyframes animateCursor {
+  0% {
+    cursor: url('images/cursor_1.png'), default;
+  }
+  50% {
+    cursor: url('images/cursor_2.png'), default;
+  }
+  100% {
+    cursor: url('images/cursor_1.png'), default;
+  }
+}
 </style>
