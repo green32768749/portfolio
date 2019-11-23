@@ -83,7 +83,7 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    go(state: any, location) {
+    go(state: any, location: string) {
       if (Object.keys(state.articles).includes(location)) {
         if (state.bookmark !== location) {
           state.bookmark = location;

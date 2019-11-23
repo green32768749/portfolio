@@ -33,7 +33,7 @@
           </span>
         </p>
         <transition name="fade">
-          <div class="row" v-if="state.imageShow">
+          <div class="row" v-if="state.imageShow.value">
             <Picture
               :key="index"
               v-for="(item, index) in $store.state.current.images"
@@ -58,9 +58,10 @@
 </template>
 
 <script lang="ts">
-import { createComponent, onMounted, reactive } from '@vue/composition-api';
+import { createComponent, onMounted, reactive, isRef } from '@vue/composition-api';
 import VueEasyLightbox from 'vue-easy-lightbox';
 
+import useImageList from '../composition/use-image-list';
 import Picture from './Picture.vue';
 
 export default createComponent({
@@ -72,7 +73,7 @@ export default createComponent({
   setup(props, { root }) {
     const $store = root.$store;
     const $loading = root.$loading;
-    const state: any = reactive({
+    const state = reactive({
       panelShow: true,
       imageShow: true,
       albumShow: false,
@@ -81,7 +82,10 @@ export default createComponent({
 
     onMounted(() => {
       loadImage();
-      $store.watch((localState: any) => localState.tab, () => loadImage());
+      $store.watch(
+        (localState: any) => localState.tab,
+        () => loadImage(),
+      );
     });
 
     function go(location: string) {
@@ -109,19 +113,27 @@ export default createComponent({
       });
     }
 
-    function loadImage(key: string = 'QAZQAZWFR@R') {
+    function loadImage() {
       const loader = $loading.show();
-      const name = getTitle();
-      state.imageShow = false;
-      fetch(
-        `https://script.google.com/macros/s/AKfycbx2nKhxh5IiPSkI6dsAxNtyRN67wvpAmnK4WETy15BcRJ2VhdHC/exec?key=${key}&name=${name}`,
-      )
-        .then((res) => res.json())
-        .then((jsonArr) => {
-          $store.state.current.images = jsonArr;
-          state.imageShow = true;
-          loader.hide();
-        });
+      const { submitted, imageList, error, fetching, name } = useImageList();
+      name.value = getTitle();
+      state.imageShow = true;
+      submitted().then(() => {
+        state.imageShow = false;
+        console.log(imageList);
+        $store.state.current.images = imageList.value;
+        loader.hide();
+      });
+      // state.imageShow = false;
+      // fetch(
+      //   `https://script.google.com/macros/s/AKfycbx2nKhxh5IiPSkI6dsAxNtyRN67wvpAmnK4WETy15BcRJ2VhdHC/exec?key=${key}&name=${name}`,
+      // )
+      //   .then((res) => res.json())
+      //   .then((arr) => {
+      //     $store.state.current.images = arr;
+      // state.imageShow = true;
+      // loader.hide();
+      // });
     }
     return { state, go, getImages, showAlbum };
   },
@@ -306,4 +318,4 @@ export default createComponent({
 .fade-enter-to {
   opacity: 1;
 }
-</style> 
+</style>
