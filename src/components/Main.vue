@@ -14,7 +14,7 @@
         href="#"
         class="jumplink pic"
       >
-        <img :src="require('@/images/me.png')" alt />
+        <img :src="require('@/images/me.jpg')" alt />
       </a>
 
       <section v-if="$store.state.bookmark != 'home'">
