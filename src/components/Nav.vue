@@ -16,14 +16,13 @@
 
 <script lang="ts">
 import { createComponent } from '@vue/composition-api';
+import store from '@/store';
 
 export default createComponent({
   name: 'Nav',
-  setup(props, { root }) {
-    const $store = root.$store;
-
+  setup() {
     function go(location: string) {
-      $store.commit('go', location);
+      store.commit('go', location);
     }
     return { go };
   },

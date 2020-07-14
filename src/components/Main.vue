@@ -60,7 +60,7 @@
 <script lang="ts">
 import { createComponent, onMounted, reactive } from '@vue/composition-api';
 import VueEasyLightbox from 'vue-easy-lightbox';
-
+import store from '@/store';
 import Picture from './Picture.vue';
 
 export default createComponent({
@@ -70,7 +70,6 @@ export default createComponent({
     VueEasyLightbox,
   },
   setup(props, { root }) {
-    const $store = root.$store;
     const $loading = root.$loading;
     const state: any = reactive({
       panelShow: true,
@@ -81,11 +80,14 @@ export default createComponent({
 
     onMounted(() => {
       loadImage();
-      $store.watch((localState: any) => localState.tab, () => loadImage());
+      store.watch(
+        (localState: any) => localState.tab,
+        () => loadImage(),
+      );
     });
 
     function go(location: string) {
-      $store.commit('go', location);
+      store.commit('go', location);
     }
 
     function showAlbum(index: number) {
@@ -94,7 +96,7 @@ export default createComponent({
     }
 
     function getTitle() {
-      const tab = $store.getters.safeTab;
+      const tab = store.getters.safeTab;
       let title = '原創';
       if (tab) {
         title = tab.title;
@@ -103,7 +105,7 @@ export default createComponent({
     }
 
     function getImages() {
-      return $store.state.current.images.map((item: any[]) => {
+      return store.state.current.images.map((item: any[]) => {
         // NOTE: depends on google app scripts data structure.
         return item[2];
       });
@@ -119,7 +121,7 @@ export default createComponent({
         .then((res) => res.json())
         .then((jsonArr) => {
           // NOTE: jsonArr is an array of arrays like: [[date, name, link], ...]
-          $store.state.current.images = jsonArr;
+          store.state.current.images = jsonArr;
           state.imageShow = true;
           loader.hide();
         });
@@ -307,4 +309,4 @@ export default createComponent({
 .fade-enter-to {
   opacity: 1;
 }
-</style> 
+</style>
