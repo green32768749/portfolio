@@ -37,7 +37,7 @@
             <Picture
               :key="index"
               v-for="(item, index) in $store.state.current.images"
-              :src="item[1]"
+              :src="item[2]"
               :click="() => showAlbum(index)"
             />
           </div>
@@ -105,7 +105,7 @@ export default createComponent({
     function getImages() {
       return $store.state.current.images.map((item: any[]) => {
         // NOTE: depends on google app scripts data structure.
-        return item[1];
+        return item[2];
       });
     }
 
@@ -118,6 +118,7 @@ export default createComponent({
       )
         .then((res) => res.json())
         .then((jsonArr) => {
+          // NOTE: jsonArr is an array of arrays like: [[date, name, link], ...]
           $store.state.current.images = jsonArr;
           state.imageShow = true;
           loader.hide();
