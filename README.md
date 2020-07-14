@@ -1,20 +1,24 @@
 # portfolio
 
+## Flow chart
+
+![Flow chart](assets/flowchart.png)
+
 ## Todo
 
-* [ ] Panel size dropdown animation
-* [ ] Webpack (wait Webpack 5)
-  * image optimization
-* [x] Scss/Sass migration
-* [x] Clikable Image
-  * Lightbox
-* [x] Seperate portfolio part and commission part
-* [x] Add tab in portfolio part
-* [x] Image Lazy Loading
+- [ ] Panel size dropdown animation
+- [ ] Webpack (wait Webpack 5)
+  - image optimization
+- [x] Scss/Sass migration
+- [x] Clikable Image
+  - Lightbox
+- [x] Seperate portfolio part and commission part
+- [x] Add tab in portfolio part
+- [x] Image Lazy Loading
 
 ## Milestone
 
-* [x] migrations from class component to vue composition api (prepare for Vue 3)
+- [x] migrations from class component to vue composition api (prepare for Vue 3)
 
 ## Project setup
 
